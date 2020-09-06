@@ -7,11 +7,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todos: [{
-        task: "",
-        id: Date.now(),
-        completed: false,
-      }],
+      todos: [],
     };
   }
 
@@ -31,14 +27,25 @@ class App extends React.Component {
   toggleCompletedTodo = (todoItemId) => {
     this.setState({
       todos: this.state.todos.map((item) => {
-        if (item.id === todoItemId) {
+        if (todoItemId === item.id) {
           return {
             ...item,
-            completed: !item.completed,
+            completed: !item.completed
           };
         }
+        console.log("app: toggleCompletedTodo: after if", item)
+        console.log("app: toggleCompletedTodo: ")
         return item;
       }),
+    });
+  };
+
+  clearCompletedTodos = () => {
+    console.log("clear todos")
+    this.setState({
+      todos: this.state.todos.filter(item => {
+        return !item.completed;
+      })
     });
   };
 
@@ -52,7 +59,7 @@ class App extends React.Component {
         <TodoList
           todos={this.state.todos}
           toggleCompletedTodo={this.toggleCompletedTodo}
-          clearCompletedTodos={this.completedTodos}
+          clearCompletedTodos={this.clearCompletedTodos}
         />
       </div>
     );
