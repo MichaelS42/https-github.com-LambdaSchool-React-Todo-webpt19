@@ -7,11 +7,11 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todos: {
+      todos: [{
         task: "",
         id: Date.now(),
         completed: false,
-      },
+      }],
     };
   }
 
